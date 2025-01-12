@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CGPA Calculator</title>
+    </head>
+<body>
+    <h4>CGPA Calculator</h4>
+    <p>Out of 4</p>
+
+    <label for="sem1">1st Semester </label><br>
+    <input type="number" id="sem1" name="sem1" min="0" max="4"><br>
+
+    <label for="sem2">2nd Semester </label><br>
+    <input type="number" id="sem2" name="sem2" min="0" max="4"><br>
+
+    <label for="sem3">3rd Semester </label><br>
+    <input type="number" id="sem3" name="sem3" min="0" max="4"><br>
+
+    <label for="sem4">4th Semester </label><br>
+    <input type="number" id="sem4" name="sem4" min="0" max="4"><br><br>
+
+    <button onclick="calculateCGPA()">Calculate</button><br>
+    <p id="result"></p>
+    
+    <script>
+        function calculateCGPA() {
+            const sem1 = Number(document.getElementById('sem1').value) || 0;
+            const sem2 = Number(document.getElementById('sem2').value) || 0;
+            const sem3 = Number(document.getElementById('sem3').value) || 0;
+            const sem4 = Number(document.getElementById('sem4').value) || 0;
+
+            const cgpa = ((sem1 + sem2 + sem3 + sem4) / 4).toFixed(2);
+            document.getElementById('result').innerHTML = `Your CGPA is ${cgpa}`;
+        }
+    </script>
+</body>
+</html>
