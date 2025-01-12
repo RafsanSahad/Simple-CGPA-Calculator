@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>CGPA Calculator</h2>
+        <div id="subjects">
+            <div class="input-group">
+                <label for="subject1">Subject 1 GPA</label>
+                <input type="number" id="subject1" class="gpa" step="0.01" min="0" max="4" placeholder="Enter GPA" aria-label="Subject 1 GPA">
+            </div>
+        </div>
+        <button class="btn" onclick="addSubject()" aria-label="Add Another Subject">Add Subject</button>
+        <button class="btn" onclick="calculateCGPA()" aria-label="Calculate CGPA">Calculate CGPA</button>
+        <div id="feedback" class="error"></div>
+        <div id="cgpaResult" class="result"></div>
+    </div>
+
+    <script>
+        let subjectCount = 1;
+
+        function addSubject() {
+            subjectCount++;
+            const subjectDiv = document.createElement("div");
+            subjectDiv.classList.add("input-group");
+            subjectDiv.innerHTML = `
+                <label for="subject${subjectCount}">Subject ${subjectCount} GPA</label>
+                <input type="number" id="subject${subjectCount}" class="gpa" step="0.01" min="0" max="4" placeholder="Enter GPA" aria-label="Subject ${subjectCount} GPA">
+            `;
+            document.getElementById("subjects").appendChild(subjectDiv);
+        }
+
+        function calculateCGPA() {
+            const gpas = document.querySelectorAll(".gpa");
+            let totalGPA = 0;
+            let validSubjects = 0;
+            let feedback = "";
+
+            gpas.forEach((gpa, index) => {
+                const gpaValue = parseFloat(gpa.value);
+                if (gpa.value.trim() === "") {
+                    feedback += `Subject ${index + 1}: GPA is required.<br>`;
+                } else if (gpaValue < 0 || gpaValue > 4 || isNaN(gpaValue)) {
+                    feedback += `Subject ${index + 1}: GPA must be between 0 and 4.<br>`;
+                } else {
+                    totalGPA += gpaValue;
+                    validSubjects++;
+                }
+            });
+
+            const feedbackElement = document.getElementById("feedback");
+            feedbackElement.innerHTML = feedback;
+
+            if (validSubjects > 0 && feedback === "") {
+                const cgpa = (totalGPA / validSubjects).toFixed(2);
+                document.getElementById("cgpaResult").innerHTML = `Your CGPA is: <strong>${cgpa}</strong>`;
+                feedbackElement.innerHTML = ""; // Clear previous errors
+            } else {
+                document.getElementById("cgpaResult").innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>
