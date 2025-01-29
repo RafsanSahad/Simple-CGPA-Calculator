@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Cgpa calculation</title>
+        <style>
+        button{
+            padding :10px 20px;
+
+
+        }
+    </style>
+    </head>
+    <body>
+        <form>
+        <label for="sub1">Subject 1</label>
+        <input type="number" id="sebject1" name="sub1"><br><br>
+
+        <label for="sub2">Subject 2</label>
+        <input type="number" id="sebject2" name="sub2"><br><br>
+
+        <label for="sub3">Subject 3</label>
+        <input type="number" id="sebject3" name="sub3"><br><br>
+
+
+
+        <button type="submit">calculate</button>
+
+
+        </form>
+        <script>
+            function submitForm(event){
+            event.preventDefault();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const sub1 = document.getElementById('sub1').value;
+            const sub2 = document.getElementById('sub2').value;
+            const sub3 = document.getElementById('sub3').value;
+
+            const cgpa =((sub1 + sub2 + sub 3)/3).toFixed(2);
+
+            window.location.href='result.html?sub1=${sub1}&sub2=${sub2}&sub3=${sub3}';
+            }
+        </script>
+
+<button onclick ="window.location.href='result.html'">Show resut</button>
+    </body>
+
+</html>
+

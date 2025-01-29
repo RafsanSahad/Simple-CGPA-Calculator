@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Result</title>
+        <style>
+        
+    </style>
+    </head>
+    <body>
+        <h2>Your cgpa is :2.5</2h>
+            <script>
+                const urlParams = new URLSearchParams(window.location.search);
+                const sub1 = parseFloat(urlParams.get('sub1')) || 0;
+                const sub2 = parseFloat(urlParams.get('sub2')) || 0;
+                const sub3 = parseFloat(urlParams.get('sub3')) || 0;
+
+                const cgpa =((sub1 + sub2 + sub 3)/3).toFixed(2);
+
+                document.write('<p>Your Cgpa is =${cgpa}</p>');
+            </script>
+
+
+    </body>
+
+</html>
